@@ -1,0 +1,34 @@
+<div class="pi-site" id="pi-site" data-page="PatientInfo" data-theme="{plhd_theme}" style="{plhd_style}">
+<div class="pi-strip"><div class="pi-wrap pi-strip-in"><span id="pi-today">{plhd_today}</span><a href="tel:{plhd_tel}" id="pi-sphone">{plhd_phone}</a></div></div>
+<header class="pi-top">
+    <div class="pi-wrap pi-top-in">
+        <button type="button" class="pi-ibtn pi-burger" aria-label="Menu" onclick="PatientInfoJs.openNav()"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+        <a class="pi-brand" href="Home"><svg class="pi-logo" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true"><rect width="40" height="40" rx="12" fill="var(--pi-accent)"/><path d="M20 9c6 4 9 9 9 14a9 9 0 0 1-18 0c0-5 3-10 9-14z" fill="#fff" opacity="0.95"/><path d="M20 15v15M15.5 22.5h9" stroke="var(--pi-accent)" stroke-width="2.6" stroke-linecap="round"/></svg><span><b id="pi-brand">{plhd_name}</b><small id="pi-town">{plhd_town}</small></span></a>
+        <nav class="pi-nav" aria-label="Main">{plhd_nav}</nav>
+        <div class="pi-tools">
+            <a class="pi-tl pi-mylink" href="MyAppointment">My appointment</a>
+            <button type="button" class="pi-ibtn" aria-label="Light or dark" title="Light or dark" onclick="PatientInfoJs.toggleTheme()"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5z"/></svg></button>
+            <a class="pi-btn pi-btn-accent pi-book" href="Book">Book now</a>
+        </div>
+    </div>
+</header>
+<div class="pi-demo-bar" id="pi-demo-bar"></div>
+<aside class="pi-drawer" id="pi-nav" aria-label="Menu">
+    <div class="pi-dr-top"><b>{plhd_name}</b><button type="button" class="pi-ibtn" aria-label="Close" onclick="PatientInfoJs.closeNav()"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <nav class="pi-dr-list">{plhd_drawer}</nav>
+    <a class="pi-btn pi-btn-accent pi-btn-wide" href="Book">Book an appointment</a>
+</aside>
+<div class="pi-scrim" id="pi-scrim" onclick="PatientInfoJs.closeNav()"></div>
+<main class="pi-main" id="pi-main">{plhd_main}</main>
+<footer class="pi-foot">
+    <div class="pi-wrap pi-foot-in">
+        <div class="pi-fcol pi-fabout"><a class="pi-fbrand" href="Home">{plhd_name}</a><p id="pi-ftag">{plhd_tagline}</p><p class="pi-faddr" id="pi-faddr">{plhd_addr}<br><a href="tel:{plhd_tel}">{plhd_phone}</a> &middot; <a href="mailto:{plhd_email}">{plhd_email}</a></p></div>
+        <div class="pi-fcol"><b>Visit</b><a href="Book">Book an appointment</a><a href="MyAppointment">Change or cancel</a><a href="PatientInfo">Patient information</a><a href="Contact">Hours &amp; directions</a></div>
+        <div class="pi-fcol"><b>Care</b><a href="Services">Services</a><a href="Providers" id="pi-fprov">{plhd_providers}</a><a href="PatientInfo#faq">Questions</a><a href="AdminLogin">Staff sign in</a></div>
+        <div class="pi-fcol pi-fhours"><b>Opening hours</b><div id="pi-fhours">{plhd_hours}</div></div>
+    </div>
+    <p class="pi-wrap pi-urgent" id="pi-urgent">{plhd_urgent}</p>
+    <p class="pi-wrap pi-copy">&copy; 2026 {plhd_name} &middot; A fictional clinic built with the SkyNet Framework. Every clinician, patient and price is invented. This site does not give medical advice.</p>
+</footer>
+<div class="pi-toast" id="pi-toast" role="status" aria-live="polite"></div>
+</div>

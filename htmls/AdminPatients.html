@@ -1,0 +1,21 @@
+<div class="pt-site pt-admin" id="pt-site" data-theme="light" style="{plhd_style}">
+<header class="pt-ahead">
+    <button type="button" class="pt-ibtn pt-burger" aria-label="Menu" onclick="AdminPatientsJs.openNav()"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <a class="pt-abrand" href="Admin">{plhd_name}<span>Admin</span></a>
+    <span class="pt-demo" id="pt-demo"></span>
+    <span class="pt-grow"></span>
+    <a class="pt-who" id="pt-who" href="AdminAccount"></a>
+    <a class="pt-view" href="Home" target="_blank" rel="noopener">View site</a>
+    <button type="button" class="pt-out" onclick="AdminPatientsJs.signOut()">Sign out</button>
+</header>
+<aside class="pt-side" id="pt-nav" aria-label="Admin">
+    <div class="pt-nav-top"><span>Menu</span><button type="button" class="pt-ibtn" aria-label="Close" onclick="AdminPatientsJs.closeNav()"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <ul class="pt-amenu" id="pt-menu"></ul>
+</aside>
+<div class="pt-scrim" id="pt-scrim" onclick="AdminPatientsJs.closeNav()"></div>
+<main class="pt-amain" id="pt-main"><p class="pt-loading">Loading&hellip;</p></main>
+<div class="pt-modal" id="pt-modal" onclick="if(event.target===this)AdminPatientsJs.closeModal()">
+    <div class="pt-mbox" role="dialog" aria-modal="true"><button type="button" class="pt-ibtn pt-mclose" aria-label="Close" onclick="AdminPatientsJs.closeModal()"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button><div id="pt-mbody"></div></div>
+</div>
+<div class="pt-toast" id="pt-toast" role="status" aria-live="polite"></div>
+</div>

@@ -1,0 +1,21 @@
+<div class="pd-site pd-admin" id="pd-site" data-theme="light" style="{plhd_style}">
+<header class="pd-ahead">
+    <button type="button" class="pd-ibtn pd-burger" aria-label="Menu" onclick="AdminProvidersJs.openNav()"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <a class="pd-abrand" href="Admin">{plhd_name}<span>Admin</span></a>
+    <span class="pd-demo" id="pd-demo"></span>
+    <span class="pd-grow"></span>
+    <a class="pd-who" id="pd-who" href="AdminAccount"></a>
+    <a class="pd-view" href="Home" target="_blank" rel="noopener">View site</a>
+    <button type="button" class="pd-out" onclick="AdminProvidersJs.signOut()">Sign out</button>
+</header>
+<aside class="pd-side" id="pd-nav" aria-label="Admin">
+    <div class="pd-nav-top"><span>Menu</span><button type="button" class="pd-ibtn" aria-label="Close" onclick="AdminProvidersJs.closeNav()"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <ul class="pd-amenu" id="pd-menu"></ul>
+</aside>
+<div class="pd-scrim" id="pd-scrim" onclick="AdminProvidersJs.closeNav()"></div>
+<main class="pd-amain" id="pd-main"><p class="pd-loading">Loading&hellip;</p></main>
+<div class="pd-modal" id="pd-modal" onclick="if(event.target===this)AdminProvidersJs.closeModal()">
+    <div class="pd-mbox" role="dialog" aria-modal="true"><button type="button" class="pd-ibtn pd-mclose" aria-label="Close" onclick="AdminProvidersJs.closeModal()"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button><div id="pd-mbody"></div></div>
+</div>
+<div class="pd-toast" id="pd-toast" role="status" aria-live="polite"></div>
+</div>

@@ -1,0 +1,34 @@
+<div class="sv-site" id="sv-site" data-page="Services" data-theme="{plhd_theme}" style="{plhd_style}">
+<div class="sv-strip"><div class="sv-wrap sv-strip-in"><span id="sv-today">{plhd_today}</span><a href="tel:{plhd_tel}" id="sv-sphone">{plhd_phone}</a></div></div>
+<header class="sv-top">
+    <div class="sv-wrap sv-top-in">
+        <button type="button" class="sv-ibtn sv-burger" aria-label="Menu" onclick="ServicesJs.openNav()"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+        <a class="sv-brand" href="Home"><svg class="sv-logo" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true"><rect width="40" height="40" rx="12" fill="var(--sv-accent)"/><path d="M20 9c6 4 9 9 9 14a9 9 0 0 1-18 0c0-5 3-10 9-14z" fill="#fff" opacity="0.95"/><path d="M20 15v15M15.5 22.5h9" stroke="var(--sv-accent)" stroke-width="2.6" stroke-linecap="round"/></svg><span><b id="sv-brand">{plhd_name}</b><small id="sv-town">{plhd_town}</small></span></a>
+        <nav class="sv-nav" aria-label="Main">{plhd_nav}</nav>
+        <div class="sv-tools">
+            <a class="sv-tl sv-mylink" href="MyAppointment">My appointment</a>
+            <button type="button" class="sv-ibtn" aria-label="Light or dark" title="Light or dark" onclick="ServicesJs.toggleTheme()"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5z"/></svg></button>
+            <a class="sv-btn sv-btn-accent sv-book" href="Book">Book now</a>
+        </div>
+    </div>
+</header>
+<div class="sv-demo-bar" id="sv-demo-bar"></div>
+<aside class="sv-drawer" id="sv-nav" aria-label="Menu">
+    <div class="sv-dr-top"><b>{plhd_name}</b><button type="button" class="sv-ibtn" aria-label="Close" onclick="ServicesJs.closeNav()"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <nav class="sv-dr-list">{plhd_drawer}</nav>
+    <a class="sv-btn sv-btn-accent sv-btn-wide" href="Book">Book an appointment</a>
+</aside>
+<div class="sv-scrim" id="sv-scrim" onclick="ServicesJs.closeNav()"></div>
+<main class="sv-main" id="sv-main">{plhd_main}</main>
+<footer class="sv-foot">
+    <div class="sv-wrap sv-foot-in">
+        <div class="sv-fcol sv-fabout"><a class="sv-fbrand" href="Home">{plhd_name}</a><p id="sv-ftag">{plhd_tagline}</p><p class="sv-faddr" id="sv-faddr">{plhd_addr}<br><a href="tel:{plhd_tel}">{plhd_phone}</a> &middot; <a href="mailto:{plhd_email}">{plhd_email}</a></p></div>
+        <div class="sv-fcol"><b>Visit</b><a href="Book">Book an appointment</a><a href="MyAppointment">Change or cancel</a><a href="PatientInfo">Patient information</a><a href="Contact">Hours &amp; directions</a></div>
+        <div class="sv-fcol"><b>Care</b><a href="Services">Services</a><a href="Providers" id="sv-fprov">{plhd_providers}</a><a href="PatientInfo#faq">Questions</a><a href="AdminLogin">Staff sign in</a></div>
+        <div class="sv-fcol sv-fhours"><b>Opening hours</b><div id="sv-fhours">{plhd_hours}</div></div>
+    </div>
+    <p class="sv-wrap sv-urgent" id="sv-urgent">{plhd_urgent}</p>
+    <p class="sv-wrap sv-copy">&copy; 2026 {plhd_name} &middot; A fictional clinic built with the SkyNet Framework. Every clinician, patient and price is invented. This site does not give medical advice.</p>
+</footer>
+<div class="sv-toast" id="sv-toast" role="status" aria-live="polite"></div>
+</div>
