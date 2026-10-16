@@ -92,7 +92,12 @@ namespace Clinic.codes
 
         private const int Size = 20;
 
-        private static string Summary(Staff u)
+        private static string AreaName(SiteData site, Area a)
+        {
+            return a.Key switch { "providers" => site.Settings.ProvidersWord, "rooms" => site.Settings.RoomsWord, "patients" => site.Settings.PatientsWord, _ => a.Name };
+        }
+
+        private static string Summary(Staff u, SiteData site)
         {
             if (u.Admin)
             {
@@ -107,7 +112,7 @@ namespace Clinic.codes
                 {
                     continue;
                 }
-                parts.Add("<b>" + Ui.Enc(a.Name) + "</b> " + (lv.Contains('E') ? "edit" : "view") + (lv.Contains('X') ? " + " + Ui.Enc(a.Extra.ToLowerInvariant()) : string.Empty));
+                parts.Add("<b>" + Ui.Enc(AreaName(site, a)) + "</b> " + (lv.Contains('E') ? "edit" : "view") + (lv.Contains('X') ? " + " + Ui.Enc(a.Extra.ToLowerInvariant()) : string.Empty));
             }
             return parts.Count == 0 ? "No access yet" : own + string.Join(" &middot; ", parts);
         }
@@ -116,7 +121,7 @@ namespace Clinic.codes
         {
             List<Staff> staff = await Store.LoadStaff(c.Sbx);
             StringBuilder sb = new StringBuilder("<div class=\"us-ptop\"><div><h1>Users</h1><p>Give each person access to the areas they manage. View lets them look; Edit lets them change; some areas have one extra right.</p></div><div class=\"us-acts\"><button type=\"button\" class=\"us-btn us-btn-accent\" onclick=\"AdminUsersJs.edit('')\">Add a user</button></div></div>");
-            sb.Append("<div class=\"us-bar\"><label>Search<input type=\"search\" id=\"us-q\" list=\"us-qlist\" placeholder=\"Name, login or job title\" maxlength=\"40\" oninput=\"AdminUsersJs.search()\"></label>" + Ui.DataList("us-qlist", staff.Select(s => s.Name)) + "<label>Area<select id=\"us-urole\" onchange=\"AdminUsersJs.list(1)\"><option value=\"\">Any area</option><option value=\"admin\">Clinic managers</option>" + Ui.Opts(Access.Areas.Where(a => !a.AdminOnly).Select(a => (a.Key, a.Name)), string.Empty) + "</select></label></div><div class=\"us-tbl us-ustbl\" id=\"us-list\"></div><div id=\"us-pager\"></div>");
+            sb.Append("<div class=\"us-bar\"><label>Search<input type=\"search\" id=\"us-q\" list=\"us-qlist\" placeholder=\"Name, login or job title\" maxlength=\"40\" oninput=\"AdminUsersJs.search()\"></label>" + Ui.DataList("us-qlist", staff.Select(s => s.Name)) + "<label>Area<select id=\"us-urole\" onchange=\"AdminUsersJs.list(1)\"><option value=\"\">Any area</option><option value=\"admin\">Clinic managers</option>" + Ui.Opts(Access.Areas.Where(a => !a.AdminOnly).Select(a => (a.Key, AreaName(site, a))), string.Empty) + "</select></label></div><div class=\"us-tbl us-ustbl\" id=\"us-list\"></div><div id=\"us-pager\"></div>");
             return sb.ToString();
         }
 
@@ -134,6 +139,7 @@ namespace Clinic.codes
                 return response;
             }
             List<Staff> staff = await Store.LoadStaff(c.Sbx);
+            SiteData site = await Store.LoadSite(c.Sbx);
             string term = Ui.Clip(GetDataValue("term"), 40);
             string role = Ui.Clip(GetDataValue("urole"), 20);
             List<Staff> all = staff.Where(u => (term == string.Empty || u.Name.Contains(term, StringComparison.OrdinalIgnoreCase) || u.Login.Contains(term, StringComparison.OrdinalIgnoreCase) || u.Title.Contains(term, StringComparison.OrdinalIgnoreCase)) && (role == string.Empty || (role == "admin" ? u.Admin : Access.Can(u, role, 'V')))).OrderByDescending(u => u.Admin).ThenBy(u => u.Name).ToList();
@@ -145,7 +151,7 @@ namespace Clinic.codes
             }
             foreach (Staff u in all.Skip((page - 1) * Size).Take(Size))
             {
-                sb.Append("<div class=\"us-tr\"><span class=\"us-wide\" style=\"display:flex;gap:10px;align-items:center\">" + Ui.Avatar("us", u) + "<span style=\"min-width:0\"><b>" + Ui.Enc(u.Name) + "</b><small>" + Ui.Enc(u.Title) + "</small></span></span><span data-l=\"Login\" class=\"us-code\">" + Ui.Enc(u.Login) + "</span><span data-l=\"Access\" class=\"us-areas us-wide\">" + Summary(u) + "</span><span data-l=\"Status\"><span class=\"us-st us-st-" + (u.Active ? "live\">Active" : "off\">Off") + "</span></span><span><button type=\"button\" class=\"us-btn us-btn-sm us-btn-ghost\" onclick=\"AdminUsersJs.edit('" + Ui.Attr(u.Id) + "')\">Edit</button></span></div>");
+                sb.Append("<div class=\"us-tr\"><span class=\"us-wide\" style=\"display:flex;gap:10px;align-items:center\">" + Ui.Avatar("us", u) + "<span style=\"min-width:0\"><b>" + Ui.Enc(u.Name) + "</b><small>" + Ui.Enc(u.Title) + "</small></span></span><span data-l=\"Login\" class=\"us-code\">" + Ui.Enc(u.Login) + "</span><span data-l=\"Access\" class=\"us-areas us-wide\">" + Summary(u, site) + "</span><span data-l=\"Status\"><span class=\"us-st us-st-" + (u.Active ? "live\">Active" : "off\">Off") + "</span></span><span><button type=\"button\" class=\"us-btn us-btn-sm us-btn-ghost\" onclick=\"AdminUsersJs.edit('" + Ui.Attr(u.Id) + "')\">Edit</button></span></div>");
             }
             response.SetElementContents("us-list", sb.ToString());
             response.SetElementContents("us-pager", Ui.Pager("us", page, Size, all.Count, "user", "users", "AdminUsersJs.list"));
@@ -177,7 +183,7 @@ namespace Clinic.codes
                 string lv = v.Admin ? "VE" : Access.Level(v, a.Key);
                 string cur = lv.Contains('E') ? "VE" : lv.Contains('V') ? "V" : string.Empty;
                 string n = "us-p-" + a.Key;
-                sb.Append("<div class=\"us-mrow\" data-area=\"" + a.Key + "\"><span><b>" + Ui.Enc(a.Name) + "</b></span><label><input type=\"radio\" name=\"" + n + "\" value=\"\"" + (cur == string.Empty ? " checked" : string.Empty) + " aria-label=\"No access to " + Ui.Attr(a.Name) + "\"></label><label><input type=\"radio\" name=\"" + n + "\" value=\"V\"" + (cur == "V" ? " checked" : string.Empty) + " aria-label=\"View " + Ui.Attr(a.Name) + "\"></label><label>" + (a.NoEdit ? "<span class=\"us-hint\">&ndash;</span>" : "<input type=\"radio\" name=\"" + n + "\" value=\"VE\"" + (cur == "VE" ? " checked" : string.Empty) + " aria-label=\"Edit " + Ui.Attr(a.Name) + "\">") + "</label><span>" + (a.Extra != string.Empty ? "<label class=\"us-x\"><input type=\"checkbox\"" + (lv.Contains('X') ? " checked" : string.Empty) + "> " + Ui.Enc(a.Extra) + "</label>" : string.Empty) + "</span></div>");
+                sb.Append("<div class=\"us-mrow\" data-area=\"" + a.Key + "\"><span><b>" + Ui.Enc(AreaName(site, a)) + "</b></span><label><input type=\"radio\" name=\"" + n + "\" value=\"\"" + (cur == string.Empty ? " checked" : string.Empty) + " aria-label=\"No access to " + Ui.Attr(AreaName(site, a)) + "\"></label><label><input type=\"radio\" name=\"" + n + "\" value=\"V\"" + (cur == "V" ? " checked" : string.Empty) + " aria-label=\"View " + Ui.Attr(AreaName(site, a)) + "\"></label><label>" + (a.NoEdit ? "<span class=\"us-hint\">&ndash;</span>" : "<input type=\"radio\" name=\"" + n + "\" value=\"VE\"" + (cur == "VE" ? " checked" : string.Empty) + " aria-label=\"Edit " + Ui.Attr(AreaName(site, a)) + "\">") + "</label><span>" + (a.Extra != string.Empty ? "<label class=\"us-x\"><input type=\"checkbox\"" + (lv.Contains('X') ? " checked" : string.Empty) + "> " + Ui.Enc(a.Extra) + "</label>" : string.Empty) + "</span></div>");
             }
             sb.Append("</div><p class=\"us-hint\" style=\"margin-top:6px\">Extra rights need Edit. Users and Settings belong to clinic managers only. Everyone can see their own activity.</p></div><em class=\"us-err\" id=\"us-e-user\"></em></div><div class=\"us-mfoot\"><button type=\"button\" class=\"us-btn us-btn-ghost\" onclick=\"AdminUsersJs.closeModal()\">Cancel</button><button type=\"button\" class=\"us-btn us-btn-accent\" onclick=\"AdminUsersJs.save('" + Ui.Attr(u?.Id ?? string.Empty) + "')\">Save</button></div>");
             response.SetElementContents("us-mbody", sb.ToString());
