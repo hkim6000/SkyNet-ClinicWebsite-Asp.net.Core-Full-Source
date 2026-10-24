@@ -1,0 +1,111 @@
+[
+ {
+  "id": "u-avery",
+  "login": "avery",
+  "name": "Avery Collins",
+  "title": "Clinic manager",
+  "hash": "pbkdf2$100000$xEdXiGmgza303toq/jTHeQ==$lfYngtm50nGpAi1fMhWde1YkehRO3qNeGFPq0XoeL78=",
+  "providerId": "",
+  "own": false,
+  "admin": true,
+  "active": true,
+  "demo": true,
+  "perms": {}
+ },
+ {
+  "id": "u-jordan",
+  "login": "jordan",
+  "name": "Jordan Price",
+  "title": "Front desk",
+  "hash": "pbkdf2$100000$vJc99bn4M5BfQlAaN/jCIA==$QQ+WtFkCEygFepsQOkhW/hz1brsqOAqN9/ksFuBBr98=",
+  "providerId": "",
+  "own": false,
+  "admin": false,
+  "active": true,
+  "demo": true,
+  "perms": {
+   "schedule": "E",
+   "appointments": "EX",
+   "patients": "E",
+   "providers": "V",
+   "services": "V",
+   "rooms": "V"
+  }
+ },
+ {
+  "id": "u-hart",
+  "login": "hart",
+  "name": "Dr. Amelia Hart",
+  "title": "Family physician",
+  "hash": "pbkdf2$100000$FR+f91e+rynwn+fAi29luQ==$xXj/ZSWQmZzyOQk9/xudGWbET6tixEfA1ZaOyNOAtyM=",
+  "providerId": "p-hart",
+  "own": true,
+  "admin": false,
+  "active": true,
+  "demo": true,
+  "perms": {
+   "schedule": "E",
+   "appointments": "E",
+   "patients": "V",
+   "providers": "V",
+   "services": "V"
+  }
+ },
+ {
+  "id": "u-okafor",
+  "login": "okafor",
+  "name": "Dr. Nadia Okafor",
+  "title": "Dentist",
+  "hash": "pbkdf2$100000$qaWP7YTB1wRUNl6a/g+h+Q==$/m1IW/1C1EDqJTmiuLtPn3oT6DpA2GH5JGzUk4Hja7E=",
+  "providerId": "p-okafor",
+  "own": true,
+  "admin": false,
+  "active": true,
+  "demo": true,
+  "perms": {
+   "schedule": "E",
+   "appointments": "E",
+   "patients": "V",
+   "providers": "V",
+   "services": "V"
+  }
+ },
+ {
+  "id": "u-sofia",
+  "login": "sofia",
+  "name": "Sofia Lindqvist",
+  "title": "Physiotherapist",
+  "hash": "pbkdf2$100000$p9DimFhsRbCc9mkeUi/+Xg==$71W070o2VJQvZ90KmYZhCQSyvXHVVSoYLexK9VJ1C7g=",
+  "providerId": "p-lindqvist",
+  "own": true,
+  "admin": false,
+  "active": true,
+  "demo": true,
+  "perms": {
+   "schedule": "E",
+   "appointments": "E",
+   "patients": "V",
+   "providers": "V",
+   "services": "V"
+  }
+ },
+ {
+  "id": "u-morgan",
+  "login": "morgan",
+  "name": "Morgan Ellis",
+  "title": "Billing (view only)",
+  "hash": "pbkdf2$100000$RvBNWP7G1cTkpycCRQhnRg==$Ng1WzdpHWFDhfZzNvznnszheFipIhPVCWR/C11dZLXE=",
+  "providerId": "",
+  "own": false,
+  "admin": false,
+  "active": true,
+  "demo": true,
+  "perms": {
+   "schedule": "V",
+   "appointments": "V",
+   "patients": "V",
+   "services": "V",
+   "activity": "V"
+  }
+ }
+]
